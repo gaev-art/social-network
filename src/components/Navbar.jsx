@@ -1,22 +1,22 @@
 import React from 'react';
-
+import s from './Navbar.module.css'
 
 const Navbar = () => {
     return (
-            <nav className='nav'>
-                <div>
+            <nav className={s.nav}>
+                <div className={s.item}>
                     <a>Profile</a>
                 </div>
-                <div>
+                <div className={s.item}>
                     <a>Messages</a>
                 </div>
-                <div>
+                <div className={s.item}>
                     <a>News</a>
                 </div>
-                <div>
+                <div className={s.item}>
                     <a>Music</a>
                 </div>
-                <div>
+                <div className={s.item}>
                     <a>Settings</a>
                 </div>
 
@@ -25,4 +25,3 @@ const Navbar = () => {
 }
 
 export default Navbar;
-//https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg
