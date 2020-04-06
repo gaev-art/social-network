@@ -1,17 +1,13 @@
 import React from 'react';
-import s from './Profile.module.css'
 import MyPost from "./MyPost/MyPost";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import s from './Profile.module.css';
 
-const Profile = () => {
+const Profile = (props) => {
     return (
         <div>
-            <div>
-                <img src='https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg' className={s.img}/>
-            </div>
-            <div>
-                ava + description
-            </div>
-           <MyPost/>
+            <ProfileInfo/>
+            <MyPost/>
         </div>
     );
 }
