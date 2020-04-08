@@ -1,7 +1,15 @@
 .header {
     grid-area: h;
-    background-color: green;
+    background-color: rgba(188, 232, 137, 0.97);
+    justify-content: flex-end;
+
+
+
+
 }
 .header img {
     width: 60px;
 }
+
+
+
