@@ -5,14 +5,14 @@
 
 .dialogsItems a {
     /*padding: 10px;*/
-    color: white;
+    color: #000000;
     text-decoration: none;
     display: flex;
 
 }
 
-.dialogsItems .activeLink {
-    color: gold;
+.dialogsItems a.activeLink {
+    color: #ff0000;
 }
 
 .messages a {
