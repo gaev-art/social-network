@@ -4,10 +4,11 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import s from './Profile.module.css';
 
 const Profile = (props) => {
+    debugger;
     return (
         <div>
             <ProfileInfo/>
-            <MyPost/>
+            <MyPost posts={props.state.posts}/>
         </div>
     );
 }
