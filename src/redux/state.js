@@ -19,11 +19,21 @@ let state = {
         ]
     },
     sideBar: {
-        friends:[
+        friends: [
             {id: 1, name: 'Kate'},
             {id: 2, name: 'Luffy'}
         ]
     }
+}
+
+export let addPost = (postMessage) => {
+    debugger;
+    let newPost = {
+        id: 5,
+        message: postMessage,
+        likeCounts: '0'
+    }
+    state.profilePage.posts.push(newPost);
 }
 
 export default state;

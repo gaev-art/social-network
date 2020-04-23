@@ -1,0 +1,11 @@
+
+
+.item {
+    color: white;
+    text-decoration: none;
+    margin: 20px;
+}
+
+.friend {
+    display: flex;
+}

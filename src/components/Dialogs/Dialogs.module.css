@@ -20,7 +20,8 @@
     padding: 10px;
 }
 
-.messages.message {
+.messages  {
+    padding: 10px;
 }
 
 .dialog {
