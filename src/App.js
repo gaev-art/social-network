@@ -17,8 +17,12 @@ class App extends React.Component {
                 <Header/>
                 <Navbar state={this.props.state.sideBar}/>
                 <div className='app-wrapper-content'>
-                    <Route path='/dialogs' render={() => <Dialogs state={this.props.state.dialogsPage}/>}/>
-                    <Route path='/profile' render={() => <Profile state={this.props.state.profilePage} addPost={this.props.addPost}/>}/>
+                    <Route path='/dialogs' render={() => <Dialogs
+                        state={this.props.state.dialogsPage}
+                        dispatch={this.props.dispatch}/>}/>
+                    <Route path='/profile' render={() => <Profile
+                        profilePage={this.props.state.profilePage}
+                        dispatch={this.props.dispatch}/>}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>
