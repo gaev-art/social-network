@@ -2,36 +2,17 @@ import React from 'react';
 import {connect} from "react-redux";
 import s from './Users.module.css'
 import {followAC, setUsersAC, unFollowAC} from "../../redux/usersReducer";
-
+import * as axios from 'axios'
+import ava from '../../img/men.png'
 
 const Users = (props) => {
 
-    if(props.users.length===0) {
-        props.setUsers([
-                {
-                    id: 1,
-                    avatar: 'https://avatars0.githubusercontent.com/u/61547416?s=460&u=f397123fa0fb933bd44b225a06a72e3f9ef36e4f&v=4',
-                    followed: false,
-                    fullName: 'Luffy',
-                    statys: 'gaf',
-                    location: {
-                        city: 'Minsk',
-                        country: 'Belarus'
-                    }
-                },
-                {
-                    id: 2,
-                    avatar: 'https://avatars0.githubusercontent.com/u/61547416?s=460&u=f397123fa0fb933bd44b225a06a72e3f9ef36e4f&v=4',
-                    followed: true,
-                    fullName: 'Kate',
-                    statys: 'ky-ky',
-                    location: {
-                        city: 'Minsk',
-                        country: 'Belarus'
-                    }
-                }
-            ]
-        )
+    if (props.users.length === 0) {
+        // проверка для того, что бы не было зацикливания!!
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+            .then(response => {
+                props.setUsers(response.data.items)
+            })
     }
 
 
@@ -39,13 +20,13 @@ const Users = (props) => {
         <div key={u.id}>
             <span>
                 <div>
-                    <img src={u.avatar} className={s.img}/>
+                    <img src={u.photos.small != null ? u.photos.small : ava} className={s.img}/>
                 </div>
                 <div>
                     {u.followed
                         ? <button onClick={() => {
                             props.unFollow(u.id)
-                        }}>Unfollow</button>
+                        }}>UnFollow</button>
                         : <button onClick={() => {
                             props.follow(u.id)
                         }}>Follow</button>}
@@ -54,7 +35,7 @@ const Users = (props) => {
             <span>
                 <span>
                     <div>
-                      {u.fullName}
+                      {u.name}
                     </div>
                     <div>
                       {u.statys}
@@ -62,10 +43,10 @@ const Users = (props) => {
                 </span>
                 <span>
                    <div>
-                 {u.location.country}
+                 {'u.location.country'}
                     </div>
                     <div>
-                      {u.location.city}
+                      {'u.location.city'}
                     </div>
                 </span>
             </span>
