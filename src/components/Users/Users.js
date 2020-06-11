@@ -1,14 +1,23 @@
 import React from 'react';
 import {connect} from "react-redux";
 import s from './Users.module.css'
-import {followAC, setUsersAC, unFollowAC} from "../../redux/usersReducer";
+import {followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unFollowAC} from "../../redux/usersReducer";
 import * as axios from 'axios'
 import ava from '../../img/men.png'
 
 class Users extends React.Component {
 
     componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items);
+                this.props.setTotalUsersCount(response.data.totalCount);
+            })
+    }
+
+    onPageChanged=(currentPage)=>{
+        this.props.setCurrentPage(currentPage);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`)
             .then(response => {
                 this.props.setUsers(response.data.items)
             })
@@ -17,8 +26,26 @@ class Users extends React.Component {
 
     render() {
 
-        let user = this.props.users.map(u =>
-            <div key={u.id}>
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+
+        let pages = [];
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i)
+        }
+
+        return (
+            <div>
+                <div>
+                    {pages.map(p => {
+                        return <span
+                            className={this.props.currentPage
+                            === p && s.selectedPage}
+                            onClick={()=>{this.onPageChanged(p)}}>{p},</span>
+                    })}
+
+                </div>
+                {this.props.users.map(u =>
+                        <div key={u.id}>
             <span>
                 <div>
                     <img src={u.photos.small != null ? u.photos.small : ava} className={s.img}/>
@@ -34,13 +61,16 @@ class Users extends React.Component {
                     }
                 </div>
             </span>
-                <span>
+                            <span>
                 <span>
                     <div>
                       {u.name}
                     </div>
                     <div>
                       {u.statys}
+                    </div>
+                     <div>
+                      {u.id}
                     </div>
                 </span>
                 <span>
@@ -52,12 +82,8 @@ class Users extends React.Component {
                     </div>
                 </span>
             </span>
-            </div>
-        )
-
-        return (
-            <div>
-                {user}
+                        </div>
+                )}
             </div>
         )
     }
@@ -65,7 +91,10 @@ class Users extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users
+        users: state.usersPage.users,
+        pageSize: state.usersPage.pageSize,
+        totalUsersCount: state.usersPage.totalUsersCount,
+        currentPage: state.usersPage.currentPage,
     }
 }
 
@@ -79,6 +108,12 @@ const mapDispatchToProps = (dispatch) => {
         },
         setUsers: (users) => {
             dispatch(setUsersAC(users))
+        },
+        setCurrentPage:(currentPage)=>{
+            dispatch(setCurrentPageAC(currentPage))
+        },
+        setTotalUsersCount:(totalCount)=>{
+            dispatch(setTotalUsersCountAC(totalCount))
         }
 
     }
