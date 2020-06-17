@@ -2,7 +2,7 @@ import React from 'react';
 import Header from "./Header";
 import * as axios from "axios";
 import {connect} from "react-redux";
-import {setAuthUserDate, toddleIsFetching} from "../../redux/authReducer";
+import {setAuthUserDate} from "../../redux/authReducer";
 
 
 class HeaderContainer extends React.Component {
@@ -12,10 +12,14 @@ class HeaderContainer extends React.Component {
             {withCredentials:true,}
             )
             .then(response => {
-                debugger
                 if (response.data.resultCode===0) {
                     let {id, email,login}=response.data.data
-                    this.props.setAuthUserDate(id, email,login)
+                    this.props.setAuthUserDate(id, email, login)
+                    let userId = response.data.data.id
+                    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
+                        .then(res => {
+                            //тут можно взять фото пользвотель
+                        })
                 }
 
             })
