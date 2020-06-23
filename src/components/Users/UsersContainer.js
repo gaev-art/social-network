@@ -8,31 +8,29 @@ import {
     toddleIsFetching,
     unFollow
 } from "../../redux/usersReducer";
-import * as axios from 'axios'
 import Users from "./Users";
 import Preloader from "../Preloader/Preloader";
+import {Api} from "../../api/api";
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
         this.props.toddleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-            {withCredentials:true})
+        Api.getUsers(this.props.currentPage, this.props.pageSize)
             .then(response => {
                 this.props.toddleIsFetching(false)
-                this.props.setUsers(response.data.items);
-                this.props.setTotalUsersCount(response.data.totalCount);
+                this.props.setUsers(response.items);
+                this.props.setTotalUsersCount(response.totalCount);
             })
     }
-
+ 
     onPageChanged = (currentPage) => {
         this.props.setCurrentPage(currentPage);
         this.props.toddleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`,
-            {withCredentials:true})
+        Api.getUsers(currentPage,this.props.pageSize)
             .then(response => {
                 this.props.toddleIsFetching(false)
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(response.items)
             })
     }
 
