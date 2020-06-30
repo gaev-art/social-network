@@ -13,7 +13,6 @@ import Login from "./components/Login/Login";
 
 function App(props) {
     return (
-
         <div className='app-wrapper'>
             <HeaderContainer/>
             <Navbar/>
@@ -25,7 +24,6 @@ function App(props) {
                 <Route path='/music' render={() => <Music/>}/>
                 <Route path='/settings' render={() => <Settings/>}/>
                 <Route path='/login' render={() => <Login/>}/>
-
             </div>
         </div>
     )
