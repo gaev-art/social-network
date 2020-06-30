@@ -4,10 +4,11 @@ import photo from './s.png'
 import Preloader from "../../Preloader/Preloader";
 import yes from '../../../img/true.png'
 import no from '../../../img/false.png'
+import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
 
-    if(!props.profile){
+    if (!props.profile) {
         return <Preloader/>
     }
 
@@ -21,8 +22,9 @@ const ProfileInfo = (props) => {
                 <div>{props.profile.fullName}</div>
                 <div>{props.profile.aboutMe}</div>
                 lookingForAJob:
-                <img src={props.profile.lookingForAJob ? yes:no}/>
+                <img src={props.profile.lookingForAJob ? yes : no}/>
                 {/*ava + description*/}
+                <ProfileStatus status={'yo'}/>
             </div>
         </div>
     );
