@@ -24,7 +24,9 @@ const ProfileInfo = (props) => {
                 lookingForAJob:
                 <img src={props.profile.lookingForAJob ? yes : no}/>
                 {/*ava + description*/}
-                <ProfileStatus status={'yo'}/>
+                <ProfileStatus
+                    status={props.status}
+                    updateStatus={props.updateStatus}/>
             </div>
         </div>
     );

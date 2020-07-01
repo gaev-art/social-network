@@ -23,6 +23,13 @@ export const UsersApi = {
 export const ProfileApi = {
     setUserProfile(userId){
        return instance.get(`profile/${userId}`)
+    },
+    setStatus(userId){
+        return instance.get(`profile/status/${userId}`)
+    },
+    updateStatus(status){
+        return instance.put(`profile/status`,
+            {status:status})
     }
 }
 
