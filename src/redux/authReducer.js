@@ -1,4 +1,5 @@
 import {AuthApi} from '../api/api';
+import {stopSubmit} from 'redux-form';
 
 export const SET_USER_DATE = 'SET-SET_USER_DATE';
 
@@ -53,6 +54,10 @@ export const login = (email, password, rememberMe) => (dispatch) => {
         .then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(getAuthUserDate())
+            } else {
+                debugger
+                let messages = response.data.messages.length > 0 ? response.data.messages[0]:'some error'
+                dispatch(stopSubmit('login', {_error: messages}))
             }
         })
 }
