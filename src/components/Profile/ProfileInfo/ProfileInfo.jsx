@@ -4,6 +4,7 @@ import Preloader from '../../Preloader/Preloader';
 import yes from '../../../img/true.png'
 import no from '../../../img/false.png'
 import ProfileStatus from './ProfileStatus';
+import ava from '../../../img/men.png';
 
 const ProfileInfo = (props) => {
 
@@ -17,7 +18,7 @@ const ProfileInfo = (props) => {
                 {/*<img src={photo} className={s.img}/>*/}
             </div>
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large}/>
+                <img src={props.profile.photos.large!= null ? props.profile.photos.large : ava}/>
                 <div>{props.profile.fullName}</div>
                 <div>{props.profile.aboutMe}</div>
                 lookingForAJob:
@@ -31,5 +32,6 @@ const ProfileInfo = (props) => {
         </div>
     );
 }
+
 
 export default ProfileInfo;
