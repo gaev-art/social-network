@@ -3,8 +3,8 @@ import s from './ProfileInfo.module.css';
 import Preloader from '../../Preloader/Preloader';
 import yes from '../../../img/true.png'
 import no from '../../../img/false.png'
-import ProfileStatus from './ProfileStatus';
 import ava from '../../../img/men.png';
+import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 
 const ProfileInfo = (props) => {
 
@@ -25,9 +25,13 @@ const ProfileInfo = (props) => {
                 <img src={props.profile.lookingForAJob ? yes : no}
                    className={s.icon}/>
                 {/*ava + description*/}
-                <ProfileStatus
+                <ProfileStatusWithHooks
                     status={props.status}
                     updateStatus={props.updateStatus}/>
+                    {/*<ProfileStatus*/}
+                    {/*    status={props.status}*/}
+                    {/*    updateStatus={props.updateStatus}*/}
+                    {/*/>*/}
             </div>
         </div>
     );
