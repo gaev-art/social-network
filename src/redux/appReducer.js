@@ -1,12 +1,14 @@
 import {getAuthUserDate} from './authReducer';
+import React from 'react';
 
-export const SET_INITIALIZED = 'SET_INITIALIZED';
+export const SET_INITIALIZED = 'SOCIAL_NETWORK/APP/SET_INITIALIZED';
 
 
 let initialState = {
     initialized: false,
 
 }
+
 
 
 const appReducer = (state = initialState, action) => {
