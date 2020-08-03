@@ -7,7 +7,7 @@ import {
     unFollowSuccess
 } from "../../redux/usersReducer";
 import Users from "./Users";
-import Preloader from "../Preloader/Preloader";
+import Preloader from "../common/Preloader/Preloader";
 import {Redirect} from "react-router-dom";
 import {WithAuthRedirect} from "../../Hoc/WithAuthRedirect";
 import {compose} from "redux";

@@ -1,5 +1,5 @@
 import React from 'react';
-import preloader from "../../img/SimilarPlumpBarasingha-small.gif";
+import preloader from "../../../img/SimilarPlumpBarasingha-small.gif";
 
 
 function Preloader(props) {

@@ -1,22 +1,22 @@
-import React from "react";
-import {Field, reduxForm} from "redux-form";
-import {maxLengthCreator, required} from "../../utils/validators/validators";
-import {Input} from "../FormsConrols/FormControls";
-import style from '../FormsConrols/FormControls.module.css'
+import React from 'react';
+import {Field, reduxForm} from 'redux-form';
+import {maxLengthCreator, required} from '../../utils/validators/validators';
+import {Input} from '../common/FormsConrols/FormControls';
+import style from '../common/FormsConrols/FormControls.module.css'
 
 let maxLength20 = maxLengthCreator(20)
 
 
-const LoginForm = (props) => {
+const LoginForm = ([handleSubmit, error]) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                 <Field
                     type="text"
                     placeholder='login'
                     component={Input}
                     name={'login'}
-                    validate={[required,maxLength20]}/>
+                    validate={[required, maxLength20]}/>
             </div>
             <div>
                 <Field
@@ -24,7 +24,7 @@ const LoginForm = (props) => {
                     placeholder='password'
                     component={Input}
                     name={'password'}
-                    validate={[required,maxLength20]}/>
+                    validate={[required, maxLength20]}/>
             </div>
             <div>
                 <Field
@@ -33,8 +33,8 @@ const LoginForm = (props) => {
                     name={'rememberMe'}/>
                 remember me
             </div>
-            {props.error && <div className={style.formSummaryError}>
-                {props.error}
+            {error && <div className={style.formSummaryError}>
+                {error}
             </div>}
             <div>
                 <button>Login</button>

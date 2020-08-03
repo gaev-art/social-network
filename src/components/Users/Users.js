@@ -1,7 +1,8 @@
 import React from 'react';
 import s from './Users.module.css'
 import ava from '../../img/men.png'
-import {NavLink} from "react-router-dom";
+import {NavLink} from 'react-router-dom';
+import Paginator from '../common/Paginator/Paginator';
 
 function Users(props) {
 
@@ -14,17 +15,11 @@ function Users(props) {
 
     return (
         <div>
-            <div>
-                {pages.map(p => {
-                    return <span
-                        className={props.currentPage
-                        === p && s.selectedPage}
-                        onClick={() => {
-                            props.onPageChanged(p)
-                        }}>{p},</span>
-                })}
-
-            </div>
+            <Paginator
+                currentPage={props.currentPage}
+                totalUsersCount={props.totalUsersCount}
+                pageSize={props.pageSize}
+                onPageChanged={props.onPageChanged}/>
             {props.users.map(u =>
                     <div key={u.id}>
             <span>

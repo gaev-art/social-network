@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
-import Preloader from '../../Preloader/Preloader';
+import Preloader from '../../common/Preloader/Preloader';
 import yes from '../../../img/true.png'
 import no from '../../../img/false.png'
 import ava from '../../../img/men.png';
