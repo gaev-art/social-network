@@ -3,7 +3,7 @@ import styles from "./Paginator.module.css";
 
 function Paginator(props) {
 
-    let portionSize = 10
+    let portionSize = 5
 
     let pagesCount = Math.ceil(props.totalItemsCount / props.pageSize);
 
@@ -20,21 +20,22 @@ function Paginator(props) {
 
     return (
         <div>
+            <button onClick={() => { setPortionNumber(1) }}> first </button>
             { portionNumber > 1 &&
-            <button onClick={() => { setPortionNumber(portionNumber - 1) }}>PREV</button> }
+            <button onClick={() => { setPortionNumber(portionNumber - 1) }}>Prev</button> }
 
             {pages
                 .filter(p => p >= leftPortionPageNumber && p<=rightPortionPageNumber)
                 .map((p) => {
-                    return <span className={props.currentPage === p && styles.selectedPage}
+                    return <button
+                        className={props.currentPage === p && styles.selectedPage}
                                  key={p}
                                  onClick={(e) => {
                                      props.onPageChanged(p);
-                                 }}>{p},</span>
+                                 }}>{p}</button>
                 })}
             { portionCount > portionNumber &&
-            <button onClick={() => { setPortionNumber(portionNumber + 1) }}>NEXT</button> }
-
+            <button onClick={() => { setPortionNumber(portionNumber + 1) }}>Next</button> }
         </div>
     )
 }

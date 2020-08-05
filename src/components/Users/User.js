@@ -5,14 +5,16 @@ import {NavLink} from 'react-router-dom';
 
 const User = (props) => {
  return(
-    <div>
+    <div style={{
+        'margin': '30px'
+    }}>
             <span>
                 <div>
                     <NavLink to={`/profile/${props.user.id}`}>
                     <img src={props.user.photos.small != null ? props.user.photos.small : ava} className={s.img}/>
                     </NavLink>
                 </div>
-                <div>
+                <div >
                     {props.user.followed
                         ? <button
                             disabled={props.followingInProgress.some(id => id === props.user.id)}
