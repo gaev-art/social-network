@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Navbar from './components/Navbar/Navbar';
-import  {withRouter, Route} from 'react-router-dom';
+import {withRouter, Route, BrowserRouter} from 'react-router-dom';
 import News from './components/Navbar/News/News';
 import Music from './components/Navbar/Music/Music';
 import Settings from './components/Navbar/Settings/Settings';
@@ -10,10 +10,11 @@ import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import Login from './components/Login/Login';
-import {connect} from 'react-redux';
+import {connect, Provider} from 'react-redux';
 import {compose} from 'redux';
 import {initializeApp} from './redux/appReducer';
 import Preloader from './components/common/Preloader/Preloader';
+import store from './redux/ReduxStore';
 
 
 class App extends React.Component {
@@ -24,8 +25,8 @@ class App extends React.Component {
 
     render() {
 
-        if(!this.props.initialized){
-          return <Preloader/>
+        if (!this.props.initialized) {
+            return <Preloader/>
         }
 
         return (
@@ -46,10 +47,19 @@ class App extends React.Component {
     }
 }
 
-const mapStateToProps=(state)=>({
-    initialized:state.app.initialized
+const mapStateToProps = (state) => ({
+    initialized: state.app.initialized
 })
 
-export default compose(
+
+const AppContainer = compose(
     withRouter,
     connect(mapStateToProps, {initializeApp}))(App);
+
+export const MainApp = (props) => {
+    return <BrowserRouter>
+        <Provider store={store}>
+            <AppContainer/>
+        </Provider>
+    </BrowserRouter>
+}

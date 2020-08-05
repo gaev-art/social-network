@@ -18,20 +18,19 @@ const ProfileInfo = (props) => {
                 {/*<img src={photo} className={s.img}/>*/}
             </div>
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large!= null ? props.profile.photos.large : ava}/>
+                <img src={props.profile.photos.large != null ? props.profile.photos.large : ava}/>
                 <div>{props.profile.fullName}</div>
                 <div>{props.profile.aboutMe}</div>
                 lookingForAJob:
                 <img src={props.profile.lookingForAJob ? yes : no}
-                   className={s.icon}/>
-                {/*ava + description*/}
+                     className={s.icon}/>
                 <ProfileStatusWithHooks
                     status={props.status}
                     updateStatus={props.updateStatus}/>
-                    {/*<ProfileStatus*/}
-                    {/*    status={props.status}*/}
-                    {/*    updateStatus={props.updateStatus}*/}
-                    {/*/>*/}
+                {/*<ProfileStatus*/}
+                {/*    status={props.status}*/}
+                {/*    updateStatus={props.updateStatus}*/}
+                {/*/>*/}
             </div>
         </div>
     );
