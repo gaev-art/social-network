@@ -12,7 +12,7 @@ export const TOGGLE_IS_FOLLOWING_PROGRESS = 'SOCIAL_NETWORK/USERS/TOGGLE_IS_FOLL
 let initialState = {
     users: [],
     pageSize: 100,
-    totalUsersCount: 0,
+    totalItemsCount: 0,
     currentPage: 1,
     isFetching: false,
     followingInProgress: [],
@@ -54,7 +54,7 @@ const usersReducer = (state = initialState, action) => {
         case SET_TOTAL_USERS_COUNT:
             return {
                 ...state,
-                totalUsersCount: action.totalCount
+                totalItemsCount: action.totalCount
             }
         case TOGGLE_IS_FETCHING:
             return {
