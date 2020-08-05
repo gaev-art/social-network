@@ -17,14 +17,18 @@ function Login(props) {
 
     return (
         <>
+            <h3>For test use:</h3>
+            <div>Email: <strong>free@samuraijs.com</strong></div>
+            <div>Password: <strong>free</strong></div>
+
             <h1>Login</h1>
             <LoginReduxForm onSubmit={onSubmit}/>
         </>
     )
 }
 
-const mapStateToProps=(state)=>({
-     isAuth: state.auth.isAuth,
+const mapStateToProps = (state) => ({
+    isAuth: state.auth.isAuth,
 })
 
 
