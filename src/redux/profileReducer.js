@@ -4,6 +4,7 @@ const ADD_POST = 'SOCIAL_NETWORK/PROFILE/ADD-POST';
 const SET_USER_PROFILE = 'SOCIAL_NETWORK/PROFILE/SET_USER_PROFILE';
 const SET_STATUS = 'SOCIAL_NETWORK/PROFILE/SET_STATUS';
 const DELETE_POST = 'SOCIAL_NETWORK/PROFILE/DELETE_POST';
+const SAVE_PHOTO = 'SOCIAL_NETWORK/PROFILE/SAVE_PHOTO';
 
 let initialState = {
     posts: [
@@ -39,6 +40,14 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 status: action.status
             }
+        case SAVE_PHOTO:
+            return {
+                ...state,
+                profile: {
+                    ...state.profile,
+                photos:action.file
+                }
+            }
         case DELETE_POST:
             return {
                 ...state,
@@ -63,6 +72,9 @@ export const setStatusSuccess = (status) => ({
 export const deletePost = (postId) => ({
     type: DELETE_POST, postId
 })
+export const savePhotoSuccess = (file) => ({
+    type: SAVE_PHOTO, file
+})
 
 
 //Thunks
@@ -80,6 +92,12 @@ export const updateStatus = (status) => async (dispatch) => {
     let response = await ProfileApi.updateStatus(status)
     if (response.data.resultCode === 0) {
         dispatch(setStatusSuccess(status))
+    }
+}
+export const savePhoto = (file) => async (dispatch) => {
+    let response = await ProfileApi.savePhoto(file)
+    if (response.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.data.photos))
     }
 }
 
