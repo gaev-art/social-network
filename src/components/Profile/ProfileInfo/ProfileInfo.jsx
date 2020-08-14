@@ -73,7 +73,6 @@ const ProfileData = (props) => {
         <div><b>Contacts</b>:{Object.keys(props.profile.contacts)
             // .filter(key=>props.profile.contacts[key] !==null || '') ??
             .map(key => {
-                debugger
             return <Contact
                 key={key}
                 contactTitle={key}

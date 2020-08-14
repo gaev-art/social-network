@@ -29,6 +29,7 @@ const MyPost = React.memo((props) => {
 
     let postsElement = props.posts.map((p) =>
         <Post
+            photo={props.photo}
             key={p.id}
             message={p.message}
             likeCounts={p.likeCounts}/>)
