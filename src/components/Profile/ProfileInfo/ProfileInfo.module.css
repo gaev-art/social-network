@@ -9,4 +9,15 @@ padding: 10px;
  .icon{
      width: 20px;
      height: 20px;
+     padding-left: 10px;
  }
+
+ .contact{
+   padding-left: 10px;
+ }
+
+.formSummaryError {
+    border: red 1px solid;
+    padding: 5px;
+    color: indianred;
+}

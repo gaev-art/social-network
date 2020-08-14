@@ -26,7 +26,7 @@ let AddNewPostFormRedux = reduxForm({form: 'profileAddNewPostForm'})(AddNewPost)
 
 const MyPost = React.memo((props) => {
 
-    console.log('render')
+
     let postsElement = props.posts.map((p) =>
         <Post
             key={p.id}
