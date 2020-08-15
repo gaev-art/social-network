@@ -16,6 +16,7 @@ import {initializeApp} from './redux/appReducer';
 import Preloader from './components/common/Preloader/Preloader';
 import store from './redux/ReduxStore';
 import {WithSuspense} from './Hoc/WithSuspense';
+import FriendsContainer from './components/Navbar/Friends/FriendsContainer';
 
 const DialogsContainer = React.lazy(()=>import('./components/Dialogs/DialogsContainer'))
 
@@ -44,6 +45,7 @@ class App extends React.Component {
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>
+                    <Route path='/friends' render={() => <FriendsContainer/>}/>
                     <Route path='/login' render={() => <Login/>}/>
                 </div>
             </div>

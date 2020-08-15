@@ -33,6 +33,17 @@ const LoginForm = (props) => {
                     name={'rememberMe'}/>
                 remember me
             </div>
+            {props.captchaUrl && <div>
+                <img src={props.captchaUrl}/>
+                <Field
+                type="text"
+                placeholder='Symbols from image'
+                component={Input}
+                name={'captcha'}
+                validate={required}/>
+                </div>
+            }
+
             {props.error && <div className={style.formSummaryError}>
                 {props.error}
             </div>}
