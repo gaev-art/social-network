@@ -1,11 +1,23 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import s from './Friends.module.css'
-import FriendsItem from "./FriendsItem/FriendsItem";
+import FriendsItem from './FriendsItem/FriendsItem';
+import {useDispatch} from 'react-redux';
+import {getUsers} from '../../../redux/usersReducer';
 
 const Friends = (props) => {
 
-    let friendsElement = props.friends.map( f => <FriendsItem key={f.id} name={f.name} id={f.id}/> );
+    const dispatch = useDispatch();
 
+    useEffect(() => {
+        dispatch(getUsers(26,100))  //!?????
+    }, [dispatch]);
+
+    let friendsElement = props.users
+        .filter(f => f.followed !== false)
+        .map(u => <FriendsItem
+        key={u.id}
+        user={u}
+        {...props}/>);
     return (
         <div>
             <div className={s.item}>Friends</div>

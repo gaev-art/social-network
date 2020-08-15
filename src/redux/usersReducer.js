@@ -11,7 +11,7 @@ export const TOGGLE_IS_FOLLOWING_PROGRESS = 'SOCIAL_NETWORK/USERS/TOGGLE_IS_FOLL
 
 let initialState = {
     users: [],
-    pageSize: 10,
+    pageSize: 100,
     totalItemsCount: 0,
     currentPage: 1,
     isFetching: false,

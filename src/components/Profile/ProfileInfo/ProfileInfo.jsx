@@ -33,7 +33,8 @@ const ProfileInfo = (props) => {
                     initialValues={props.profile}
                     profile={props.profile}
                     onSubmit={onSubmit}
-                    cancelEditMode={cancelEditMode}/>
+                    cancelEditMode={cancelEditMode}
+                    savePhoto={props.savePhoto}/>
                 : <ProfileData
                     profile={props.profile}
                     isOwner={props.isOwner}

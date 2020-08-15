@@ -1,18 +1,37 @@
 import React from 'react';
 import s from './FriendsItem.module.css'
 import {NavLink} from "react-router-dom";
-import DialogItem from "../../../Dialogs/DialogItem/DialogsItem";
+import ava from '../../../../img/men.png';
 
 const FriendsItem = (props) => {
-    let path = '/friends/' + props.id;
     return (
-        <div className={s.item}>
-        <NavLink to={path} activeClassName={s.activeLink}>
-            {/*<img*/}
-            {/*    src='https://avatars0.githubusercontent.com/u/61547416?s=460&u=f397123fa0fb933bd44b225a06a72e3f9ef36e4f&v=4'*/}
-            {/*    className={s.img}/>*/}
-            {props.name}
-        </NavLink>
+        <div style={{
+            'margin': '30px'
+        }}>
+            <NavLink to={`/profile/${props.user.id}`}>
+                <img src={props.user.photos.small != null ? props.user.photos.small : ava} className={s.img}/>
+            </NavLink>
+                    <div>
+                    {props.user.name}
+                    </div>
+            <div >
+                {props.user.followed
+                    ? <button
+                        disabled={props.followingInProgress.some(id => id === props.user.id)}
+                        onClick={() => {
+                            props.unFollow(props.user.id)
+                        }}>
+                        UnFollow
+                    </button>
+                    : <button
+                        disabled={props.followingInProgress.some(id => id === props.user.id)}
+                        onClick={() => {
+                            props.follow(props.user.id)
+                        }}>
+                        Follow
+                    </button>
+                }
+            </div>
         </div>
     );
 }

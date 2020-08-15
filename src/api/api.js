@@ -39,7 +39,7 @@ export const ProfileApi = {
             formData, {
                 headers: {'Content-Type': 'multipart/form-data'}
             }
-            )
+        )
     },
     saveProfile(profile) {
         return instance.put(`profile`,
@@ -51,8 +51,8 @@ export const AuthApi = {
     me() {
         return instance.get(`auth/me`)
     },
-    login(email,password, rememberMe= false,captcha) {
-        return instance.post(`auth/login`,{email,password, rememberMe,captcha})
+    login(email, password, rememberMe = false, captcha) {
+        return instance.post(`auth/login`, {email, password, rememberMe, captcha})
     },
     logout() {
         return instance.delete(`auth/login`)
@@ -62,8 +62,18 @@ export const AuthApi = {
 
 
 export const securityApi = {
-getCaptchaUrl(){
-    return instance.get(`security/get-captcha-url`)
+    getCaptchaUrl() {
+        return instance.get(`security/get-captcha-url`)
+    }
 }
-
+export const dialogsApi = {
+    getUsersDialogs() {
+        return instance.get(`dialogs`)
+    },
+    getUsersMessage(userId) {
+        return instance.get(`dialogs/${userId}/messages`)
+    },
+    sendUserMessage(userId,body){
+        return instance.post(`dialogs/${userId}/messages`,{body})
+    }
 }

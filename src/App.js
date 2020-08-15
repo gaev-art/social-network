@@ -6,7 +6,7 @@ import {Redirect, Switch, Route, withRouter, BrowserRouter} from 'react-router-d
 import News from './components/Navbar/News/News';
 import Music from './components/Navbar/Music/Music';
 import Settings from './components/Navbar/Settings/Settings';
-// import DialogsContainer from './components/Dialogs/DialogsContainer';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import Login from './components/Login/Login';
@@ -18,7 +18,7 @@ import store from './redux/ReduxStore';
 import {WithSuspense} from './Hoc/WithSuspense';
 import FriendsContainer from './components/Navbar/Friends/FriendsContainer';
 
-const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
+// const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
 
 
 class App extends React.Component {
@@ -39,8 +39,8 @@ class App extends React.Component {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Switch>
-                        <Route path='/dialogs' render={WithSuspense(DialogsContainer)}/>
-                        {/*<Route path='/dialogs' render={() =><DialogsContainer/>}/>*/}
+                        {/*<Route path='/dialogs' render={WithSuspense(DialogsContainer)}/>*/}
+                        <Route path='/dialogs' render={() =><DialogsContainer/>}/>
                         <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
                         <Route exact path='/' render={() =>  <Redirect from="/" to="/profile" />}/>
                         <Route path='/users' render={() => <UsersContainer/>}/>

@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogsItem";
 import Message from "./Message/Message";
 import {Field, reduxForm} from "redux-form";
 import {Textarea} from "../common/FormsConrols/FormControls";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
+import {useDispatch} from 'react-redux';
+import {getDialogs, getMessages} from '../../redux/dialogsReducer';
 
 let maxLength100 = maxLengthCreator(100)
 
@@ -28,15 +30,26 @@ let AddMessageFormRedux = reduxForm({form: 'dialogAddMessageForm'})(AddMessageFo
 
 
 const Dialogs = (props) => {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getDialogs())
+        dispatch(getMessages())
+
+    }, [dispatch]);
+
+
     let state = props.dialogsPage;
 
-    let dialogsElement = state.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>);
-    let messagesElement = state.messages.map(m => <Message key={m.id} message={m.message}/>);
+    let dialogsElement = state.dialogs.map(d => <DialogItem key={d.id} dialogs={d} id={d.id}/>);
+    let messagesElement = state.messages.map(m => <Message key={m.id} message={m}/>);
 
 
 
     let addNewMessage = (values) => {
         props.sendMessage(values.newMessageBody)
+        dispatch(getMessages())
     }
 
 
