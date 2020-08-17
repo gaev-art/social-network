@@ -24,7 +24,8 @@ let mapStateToProps = (state) => {
         totalItemsCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
         isFetching: getIsFetching(state),
-        followingInProgress: getFollowingInProgress(state)
+        followingInProgress: getFollowingInProgress(state),
+        friends:state.usersPage.friends,
     }
 };
 

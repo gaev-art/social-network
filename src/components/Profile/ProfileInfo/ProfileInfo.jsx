@@ -72,7 +72,7 @@ const ProfileData = (props) => {
         </div>}
 
         <div><b>Contacts</b>:{Object.keys(props.profile.contacts)
-            // .filter(key=>props.profile.contacts[key] !==null || '') ??
+            .filter(key=>props.profile.contacts[key])
             .map(key => {
             return <Contact
                 key={key}

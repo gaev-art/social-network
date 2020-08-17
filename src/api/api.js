@@ -8,7 +8,18 @@ const instance = axios.create({
 
 export const UsersApi = {
     getUsers(currentPage, pageSize) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
+        return instance.get(`users`//?page=${currentPage}&count=${pageSize}`
+            + (currentPage ? `?page=${currentPage}&` : '')
+            + (pageSize ? `count=${pageSize}` : '') //доставить & когда буду добавлять параметры
+            // + (followed ? `friend=${followed}&` : '')
+            // + (searchName ? `term=${searchName}&` : '')
+
+        )
+            .then(response => response.data)
+    },
+    getFriends() {
+        return instance.get(`users?friend=${true}`
+        )
             .then(response => response.data)
     },
     follow(id) {
@@ -66,14 +77,23 @@ export const securityApi = {
         return instance.get(`security/get-captcha-url`)
     }
 }
+
+
 export const dialogsApi = {
-    getUsersDialogs() {
+    getDialogs() {
         return instance.get(`dialogs`)
+            .then(res => res.data)
     },
-    getUsersMessage(userId) {
+    getMessages(userId) {
         return instance.get(`dialogs/${userId}/messages`)
+            .then(res => res.data.items)
     },
-    sendUserMessage(userId,body){
-        return instance.post(`dialogs/${userId}/messages`,{body})
+    startDialogs(userId) {
+        return instance.put(`dialogs/${userId}`)
+            .then(res => res.data)
+    },
+    sendMessage(userId, body) {
+        return instance.post(`dialogs/${userId}/messages`, {body})
+            .then(res => res.data)
     }
 }

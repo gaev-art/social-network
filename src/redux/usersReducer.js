@@ -3,6 +3,7 @@ import {UsersApi} from '../api/api';
 export const FOLLOW = 'SOCIAL_NETWORK/USERS/FOLLOW';
 export const UN_FOLLOW = 'SOCIAL_NETWORK/USERS/UN-FOLLOW';
 export const SET_USERS = 'SOCIAL_NETWORK/USERS/SET-USERS';
+export const SET_FRIENDS = 'SOCIAL_NETWORK/USERS/SET_FRIENDS';
 export const CURRENT_PAGE = 'SOCIAL_NETWORK/USERS/CURRENT_PAGE';
 export const SET_TOTAL_USERS_COUNT = 'SOCIAL_NETWORK/USERS/SET_TOTAL_USERS_COUNT';
 export const TOGGLE_IS_FETCHING = 'SOCIAL_NETWORK/USERS/TOGGLE_IS_FETCHING';
@@ -11,6 +12,7 @@ export const TOGGLE_IS_FOLLOWING_PROGRESS = 'SOCIAL_NETWORK/USERS/TOGGLE_IS_FOLL
 
 let initialState = {
     users: [],
+    friends:[],
     pageSize: 100,
     totalItemsCount: 0,
     currentPage: 1,
@@ -46,6 +48,11 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 users: action.users
             }
+        case SET_FRIENDS:
+            return {
+                ...state,
+                friends: action.friends
+            }
         case CURRENT_PAGE:
             return {
                 ...state,
@@ -79,6 +86,7 @@ export const followSuccess = (userId) => ({type: FOLLOW, userId});
 export const unFollowSuccess = (userId) => ({type: UN_FOLLOW, userId});
 
 export const setUsers = (users) => ({type: SET_USERS, users});
+export const setFriendsSuccess = (friends) => ({type: SET_FRIENDS, friends});
 
 export const setCurrentPage = (currentPage) => ({
     type: CURRENT_PAGE,
@@ -110,6 +118,7 @@ export const getUsers = (page, pageSize) => async (dispatch) => {
     dispatch(setTotalUsersCount(response.totalCount))
 }
 
+
 export const follow = (userId) => async (dispatch) => {
     dispatch(toggleFollowingProgress(true, userId))
     let response = await UsersApi.follow(userId)
@@ -117,6 +126,10 @@ export const follow = (userId) => async (dispatch) => {
         dispatch(followSuccess(userId))
     }
     dispatch(toggleFollowingProgress(false, userId))
+}
+export const getFriends = () => async (dispatch) => {
+    const response = await UsersApi.getFriends()
+    dispatch(setFriendsSuccess(response.items))
 }
 
 export const unFollow = (userId) => async (dispatch) => {
