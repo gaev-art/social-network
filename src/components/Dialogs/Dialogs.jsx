@@ -1,54 +1,50 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogsItem';
 import Message from './Message/Message';
-import {useDispatch} from 'react-redux';
-import {getMessages, init} from '../../redux/dialogsReducer';
 import {AddMessageFormRedux} from './AddMessageForm';
+import Preloader from '../common/Preloader/Preloader';
 
 
 const Dialogs = (props) => {
 
-    const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(init(props.userId))
-    }, [dispatch, props.userId])
+    let dialogsElement = props.dialogs.map(d => <DialogItem
+        key={d.id}
+        dialogs={d}
+        getMessages={props.getMessages}
+        userId={props.userId}/>);
 
-    const onClickHandler = React.useCallback((userId) => {
-        dispatch(getMessages(userId))
-
-    }, [dispatch])
-
-
-    const state = props.dialogsPage
-    let dialogsElement = state.dialogs.map(d => <DialogItem onClickHandler={onClickHandler} key={d.id} dialogs={d}
-                                                            userId={props.userId}/>);
-    let messagesElement = state.messages.map(m => <Message key={m.id} message={m}/>);
-
-
-    let addNewMessage = (values) => {
-        props.sendMessage(props.userId, values.newMessageBody)
-    }
+    let messagesElement = props.messages.map(m => <Message
+        key={m.id}
+        message={m}
+        userId={props.userId}
+        deleteMessage={props.deleteMessage}/>);
 
 
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
                 <h3>Dialogs:</h3>
-                {dialogsElement}
+                {props.loadingDialogs ? <Preloader/> :
+                    <div>
+                        {dialogsElement}
+                    </div>
+                }
             </div>
             <div className={s.messages}>
                 <h3>Messages:</h3>
-                {props.dialogsPage.currentDialogsId && <>
-                    <div>{messagesElement}</div>
-                    <AddMessageFormRedux
-                        onSubmit={addNewMessage}
-                    />
-                </>}
-                {!props.dialogsPage.currentDialogsId && <b>
-                    Please select dialog
-                </b>}
+                {props.messages.length < props.currentDialogsMessagesCount && <button>show prev</button>}
+                {props.currentDialogsId && <div className={s.message}>
+                    {props.loadingMessages ? <Preloader/> :
+                        <div>
+                            {messagesElement}
+                        </div>}
+                    <div>
+                        <AddMessageFormRedux onSubmit={props.addNewMessage}/>
+                    </div>
+                </div>}
+                {!props.currentDialogsId && <b>Please select dialog</b>}
             </div>
         </div>
     )

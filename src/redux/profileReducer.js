@@ -22,9 +22,10 @@ const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST:
             let newPost = {
-                id: 4,
+                id: 1,
                 message: action.newPostText,
-                likeCounts: '0'
+                likeCounts: '0',
+                date: new Date().toLocaleTimeString({hour: '2-digit', minute: '2-digit'})
             }
             return {
                 ...state,

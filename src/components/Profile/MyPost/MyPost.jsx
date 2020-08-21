@@ -32,6 +32,7 @@ const MyPost = React.memo((props) => {
             photo={props.photo}
             key={p.id}
             message={p.message}
+            date={p.date}
             likeCounts={p.likeCounts}/>)
 
 

@@ -4,17 +4,15 @@ import ava from '../../img/men.png'
 import {NavLink} from 'react-router-dom';
 
 const User = (props) => {
- return(
-    <div style={{
-        'margin': '30px'
-    }}>
+    return (
+        <div style={{'margin': '30px'}}>
             <span>
                 <div>
                     <NavLink to={`/profile/${props.user.id}`}>
                     <img src={props.user.photos.small != null ? props.user.photos.small : ava} className={s.img}/>
                     </NavLink>
                 </div>
-                <div >
+                <div>
                     {props.user.followed
                         ? <button
                             disabled={props.followingInProgress.some(id => id === props.user.id)}
@@ -29,35 +27,25 @@ const User = (props) => {
                                 props.follow(props.user.id)
                             }}>
                             Follow
-                        </button>
-                    }
+                        </button>}
                 </div>
             </span>
-    <span>
+            <span>
                 <span>
                     <div>
                      Name : {props.user.name}
                     </div>
                     <div>
-                     Status : {props.user.status ||"No status"}
+                     Status : {props.user.status || 'No status'}
                     </div>
                      <div>
                      UserId : {props.user.id}
                     </div>
                 </span>
-                <span>
-                   {/*<div>*/}
-                   {/*   {'u.location.country'}*/}
-                   {/*</div>*/}
-                   {/* <div>*/}
-                   {/*     {'u.location.city'}*/}
-                   {/* </div>*/}
-                </span>
             </span>
-</div>
- )
+        </div>
+    )
 }
-
 
 
 export default User;

@@ -5,6 +5,11 @@ export const required=value=>{
     return 'Filed is required'
 
 }
+export const SendMessage=value=>{
+    if(value)return undefined
+    return 'Enter your message'
+
+}
 
 
 

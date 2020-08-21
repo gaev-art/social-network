@@ -12,3 +12,8 @@
     padding: 5px;
     color: indianred;
 }
+
+.formControl textarea{
+  width: 500px;
+}
+

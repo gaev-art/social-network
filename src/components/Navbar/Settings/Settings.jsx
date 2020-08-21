@@ -1,11 +1,11 @@
 import React from 'react';
+import s from './Settings.module.css';
 
 
 const Settings = (props) => {
     return (
-        <div>
-            Settings
-
+        <div className={s.main}>
+            <h3>Settings</h3>
         </div>
     )
 };

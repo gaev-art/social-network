@@ -3,13 +3,13 @@ import {connect} from 'react-redux';
 import {
     follow,
     followSuccess,
-    getUsers,
+    getUsers, searchName, setPortionNumber,
+    setSearchNameSuccess,
     toggleFollowingProgress,
     unFollow,
     unFollowSuccess
 } from '../../redux/usersReducer';
 import Users from './Users';
-import Preloader from '../common/Preloader/Preloader';
 import {compose} from 'redux';
 import {
     getCurrentPage,
@@ -19,24 +19,43 @@ import {
     getTotalUsersCount,
     getUsersSelector
 } from '../../redux/user-selectors';
+import {WithAuthRedirect} from '../../Hoc/WithAuthRedirect';
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        this.props.getUsers(this.props.currentPage)
     }
 
-    onPageChanged = (currentPage) => {
-        this.props.getUsers(currentPage, this.props.pageSize)
+    onPageChanged = (newPage) => {
+        this.props.getUsers(newPage)
+    }
+
+    nextPortion = (portionNumber) => {
+        this.props.setPortionNumber(portionNumber)
+    }
+
+    prevPortion = (portionNumber) => {
+        this.props.setPortionNumber(portionNumber)
+    }
+
+    firstPortion = (portionNumber) => {
+        this.props.setPortionNumber(portionNumber)
+    }
+
+    componentWillUnmount() {
+        this.props.setSearchNameSuccess('')
+
     }
 
     render() {
         return (
             <>
-                {this.props.isFetching
-                    ? <Preloader/>
-                    : null}
-                <Users{...this.props} onPageChanged={this.onPageChanged}/>
+                <Users{...this.props}
+                      nextPortion={this.nextPortion}
+                      prevPortion={this.prevPortion}
+                      firstPortion={this.firstPortion}
+                      onPageChanged={this.onPageChanged}/>
             </>
         )
     }
@@ -50,46 +69,16 @@ const mapStateToProps = (state) => {
         totalItemsCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
         isFetching: getIsFetching(state),
-        followingInProgress: getFollowingInProgress(state)
+        followingInProgress: getFollowingInProgress(state),
+        portionSize: state.usersPage.portionSize,
+        portionNumber: state.usersPage.portionNumber,
 
     }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         follow: (userId) => {
-//             dispatch(followAC(userId))
-//         },
-//         unFollow: (userId) => {
-//             dispatch(unFollowAC(userId))
-//         },
-//         setUsers: (users) => {
-//             dispatch(setUsersAC(users))
-//         },
-//         setCurrentPage: (currentPage) => {
-//             dispatch(setCurrentPageAC(currentPage))
-//         },
-//         setTotalUsersCount: (totalCount) => {
-//             dispatch(setTotalUsersCountAC(totalCount))
-//         },
-//         toddleIsFetching: (isFetching) => {
-//             dispatch(toddleIsFetchingAC(isFetching))
-//         },
-//
-//     }
-// }
-
-// export default connect(mapStateToProps, {
-//     followSuccess,
-//     unFollowSuccess,
-//     toggleFollowingProgress,
-//     getUsers,
-//     follow,
-//     unFollow,
-// })(AuthRedirectComponent);
-
 
 export default compose(
+    WithAuthRedirect,
     connect(mapStateToProps, {
         followSuccess,
         unFollowSuccess,
@@ -97,5 +86,8 @@ export default compose(
         getUsers,
         follow,
         unFollow,
+        setSearchNameSuccess,
+        searchName,
+        setPortionNumber
     }),
 )(UsersContainer)

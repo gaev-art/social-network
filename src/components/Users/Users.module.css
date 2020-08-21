@@ -1,10 +1,19 @@
 
-.img {
-    width: 100px;
-    height: 100px;
-    /*border-radius: 30px;*/
+.main{
+    height: 100vh;
+    text-align: center;
+
 }
 
-.selectedPage{
-    font-weight: bold;
+.img {
+    width: 150px;
+    height: 150px;
+    border-radius: 30px;
+}
+
+.users{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+
 }

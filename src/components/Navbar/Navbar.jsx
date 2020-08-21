@@ -15,7 +15,9 @@ const Navbar = (props) => {
                 <NavLink to='/friends' activeClassName={s.activeLink}>Friends</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to='/dialogs' activeClassName={s.activeLink}>Messages</NavLink>
+                <NavLink to='/dialogs' activeClassName={s.activeLink}>Messages
+                </NavLink>
+                {props.newMessagesCount > 0 && <div className={s.newMessagesCount}>{props.newMessagesCount} </div>}
             </div>
             <div className={s.item}>
                 <NavLink to='/music' activeClassName={s.activeLink}>Music</NavLink>

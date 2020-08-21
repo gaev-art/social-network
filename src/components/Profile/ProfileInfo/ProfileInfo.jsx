@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
 import s from './ProfileInfo.module.css';
-import yes from '../../../img/true.png'
-import no from '../../../img/false.png'
 import ava from '../../../img/men.png';
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
-import ProfileDataReduxForm from './ProfileDataForm';
+import ProfileDataForm from './ProfileDataForm';
+import {ProfileData} from './ProfileData';
 
 const ProfileInfo = (props) => {
 
@@ -27,9 +26,9 @@ const ProfileInfo = (props) => {
     return (
         <div className={s.descriptionBlock}>
             <img src={props.profile.photos.large != null
-                ? props.profile.photos.large : ava}/>
+                ? props.profile.photos.large : ava} className={s.avatar}/>
             {editMode
-                ? <ProfileDataReduxForm
+                ? <ProfileDataForm
                     initialValues={props.profile}
                     profile={props.profile}
                     onSubmit={onSubmit}
@@ -54,39 +53,5 @@ const ProfileInfo = (props) => {
     );
 }
 
-
-const ProfileData = (props) => {
-    return <div>
-        {props.isOwner &&
-        <div>
-            <button onClick={props.goToEditMode}>edit</button>
-        </div>}
-        <div><b>Full mame</b>:{props.profile.fullName}</div>
-        <div><b>About Me</b>:{props.profile.aboutMe}</div>
-        <div><b>Looking for a job</b>:
-            <img src={props.profile.lookingForAJob ? yes : no}
-                 className={s.icon}/></div>
-        {props.profile.lookingForAJob &&
-        <div>
-            <b>My professional skill</b> : {props.profile.lookingForAJobDescription}
-        </div>}
-
-        <div><b>Contacts</b>:{Object.keys(props.profile.contacts)
-            .filter(key=>props.profile.contacts[key])
-            .map(key => {
-            return <Contact
-                key={key}
-                contactTitle={key}
-                contactValue={props.profile.contacts[key]}/>
-        })}</div>
-    </div>
-}
-
-
-export const Contact = (props) => {
-    return <div className={s.contact}>
-        <b>{props.contactTitle}</b>:<a href={props.contactValue}>{props.contactValue}</a>
-    </div>
-}
 
 export default ProfileInfo;

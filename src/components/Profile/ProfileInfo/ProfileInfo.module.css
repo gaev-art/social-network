@@ -1,16 +1,17 @@
 .descriptionBlock {
 padding: 10px;
 }
- .img {
-     width: 10px;
-     height: 200px;
-     border: none;
- }
+ /*.img {*/
+ /*    width: 10px;*/
+ /*    height: 200px;*/
+ /*    border: none;*/
+ /*}*/
 
  .icon{
-     width: 20px;
-     height: 20px;
+     width: 40px;
+     height: 40px;
      padding-left: 10px;
+     vertical-align: middle;
  }
 
  .contact{
@@ -21,4 +22,8 @@ padding: 10px;
     border: red 1px solid;
     padding: 5px;
     color: indianred;
+}
+
+.avatar{
+    border-radius: 30px;
 }

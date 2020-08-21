@@ -1,0 +1,41 @@
+.main {
+    margin: 0px auto;
+    max-width: 500px;
+    padding: 5px 5px;
+
+
+}
+
+
+.message {
+    padding: 5px;
+    border: black solid 1px;
+
+}
+
+.name {
+    display: flex;
+    align-self: flex-start;
+
+
+}
+.mainBtn{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.deleteBtn{
+background-color: #e78484;
+}
+
+
+.time {
+    font-size: 9px;
+    /*width: 30px;*/
+
+}
+.mainTime {
+    display: flex;
+    justify-content: flex-end;
+    height: 20px;
+}

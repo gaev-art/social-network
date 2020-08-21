@@ -1,9 +1,11 @@
 .main{
-    padding-left: 100px;
+    /*padding-left: 100px;*/
+    text-align: center;
+
 }
 
 .preloader {
     height: 50px;
-    position: absolute;
-    left: 350px;
+    vertical-align: middle;
+
 }

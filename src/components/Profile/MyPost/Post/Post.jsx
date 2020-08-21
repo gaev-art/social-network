@@ -4,11 +4,16 @@ import s from './Post.module.css'
 const Post = (props) => {
     return (
         <div className={s.item}>
-            <img
-                src={props.photo}/>
-            {props.message}
+            <div className={s.mainTime}>
+                <p className={s.time}>{props.date}</p>
+            </div>
             <div>
-                <span>like {props.likeCounts}</span>
+                <img
+                    src={props.photo}/>
+            </div>
+            <div>{props.message}</div>
+            <div className={s.mainLike}>
+                <span className={s.like}>like {props.likeCounts}</span>
             </div>
         </div>
 

@@ -21,6 +21,12 @@ const ProfileStatusWithHooks = (props) => {
         setStatus(e.currentTarget.value)
     }
 
+    const onKeYPress = (e) => {
+        if (e.key === "Enter") {
+            deactivateEditMode()
+        }
+    }
+
     return (
         <>
             {!editMode && <div>
@@ -32,6 +38,7 @@ const ProfileStatusWithHooks = (props) => {
             {editMode && <div>
                 Status:
                 <input
+                    onKeyPress={onKeYPress}
                     onBlur={deactivateEditMode}
                     autoFocus={true}
                     value={status}

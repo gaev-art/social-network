@@ -1,41 +1,38 @@
-import React from 'react';
-import {connect} from "react-redux";
-import Friends from "./Friends";
-import {
-    getCurrentPage, getFollowingInProgress,
-    getIsFetching,
-    getPageSize,
-    getTotalUsersCount,
-    getUsersSelector
-} from '../../../redux/user-selectors';
-import {
-    follow,
-    followSuccess,
-    getUsers,
-    toggleFollowingProgress,
-    unFollow,
-    unFollowSuccess
-} from '../../../redux/usersReducer';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import Friends from './Friends';
+import {getFriends, removeFriend} from '../../../redux/friendsReducer';
+import {startDialogs} from '../../../redux/dialogsReducer';
+import {WithAuthRedirect} from '../../../Hoc/WithAuthRedirect';
 
-let mapStateToProps = (state) => {
-    return {
-        users: getUsersSelector(state),
-        pageSize: getPageSize(state),
-        totalItemsCount: getTotalUsersCount(state),
-        currentPage: getCurrentPage(state),
-        isFetching: getIsFetching(state),
-        followingInProgress: getFollowingInProgress(state),
-        friends:state.usersPage.friends,
+
+function FriendsContainer(props) {
+
+    const friends = useSelector(state => state.friendsPage.friends)
+    const loadingFriends = useSelector(state => state.friendsPage.loadingFriends)
+
+    const dispatch = useDispatch();
+
+    const openDialogs = (friendsId) => {
+        dispatch(startDialogs(friendsId))
     }
-};
+
+    const unFollowFriend = React.useCallback((friendId) => {
+        dispatch(removeFriend(friendId))
+    }, [dispatch])
 
 
+    useEffect(() => {
+        dispatch(getFriends())
+    }, [dispatch]);
 
-const FriendsContainer = connect(mapStateToProps, { followSuccess,
-    unFollowSuccess,
-    toggleFollowingProgress,
-    getUsers,
-    follow,
-    unFollow,})(Friends)
+    return <Friends
+        unFollowFriend={unFollowFriend}
+        openDialogs={openDialogs}
+        friends={friends}
+        loadingFriends={loadingFriends}
+    />
+}
 
-export default FriendsContainer;
+
+export default WithAuthRedirect(FriendsContainer);

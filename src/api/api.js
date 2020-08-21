@@ -3,17 +3,20 @@ import * as axios from 'axios';
 const instance = axios.create({
     baseURL: `https://social-network.samuraijs.com/api/1.0/`,
     withCredentials: true,
-    headers: {'API-KEY': 'ff828688-16d2-4be6-b299-7ba046a4b32d'}
+    headers: {'API-KEY':
+        //1
+            'ff828688-16d2-4be6-b299-7ba046a4b32d'
+        //2
+        // '3f20c7e7-15c3-40fd-9a19-b1423f325934'
+    }
 })
 
 export const UsersApi = {
-    getUsers(currentPage, pageSize) {
-        return instance.get(`users`//?page=${currentPage}&count=${pageSize}`
-            + (currentPage ? `?page=${currentPage}&` : '')
-            + (pageSize ? `count=${pageSize}` : '') //доставить & когда буду добавлять параметры
-            // + (followed ? `friend=${followed}&` : '')
-            // + (searchName ? `term=${searchName}&` : '')
-
+    getUsers(currentPage, pageSize, searchName) {
+        return instance.get(`users?`
+            + (searchName  ? `term=${searchName}&` : '')
+            + (pageSize ? `count=${pageSize}&` : '')
+            + (currentPage ? `page=${currentPage}` : '')
         )
             .then(response => response.data)
     },
@@ -95,5 +98,13 @@ export const dialogsApi = {
     sendMessage(userId, body) {
         return instance.post(`dialogs/${userId}/messages`, {body})
             .then(res => res.data)
-    }
+    },
+    getNewMessages() {
+        return instance.get(`dialogs/messages/new/count`)
+            .then(res => res.data)
+    },
+    deleteMessage(messageId) {
+        return instance.delete(`dialogs/messages/${messageId}`)
+            .then(res => res.data)
+    },
 }

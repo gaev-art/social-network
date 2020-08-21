@@ -54,15 +54,10 @@ const ProfileDataForm = (props) => {
                 type="text"
                 placeholder={key}
                 component={Input}
-                name={'contacts.' + key}
-            />
+                name={'contacts.' + key}/>
             </div>
-
-            // <Contact
-            //     key={key}
-            //     contactTitle={key}
-            //     contactValue={props.profile.contacts[key]}/>
-        })}</div>
+        })}
+        </div>
         {props.error && <div className={s.formSummaryError}>
             {props.error}
         </div>}
